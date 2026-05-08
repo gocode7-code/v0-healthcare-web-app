@@ -10,25 +10,32 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Khursheed Health Hub - Holistic Healthcare Solutions',
-  description: 'Experience compassionate healthcare with Khursheed Health Hub. Offering homeopathic treatments, wellness consultations, and family health services.',
+  title: 'Khursheed Health Hub - Homeopathic Healthcare in Karachi',
+  description: 'Discover natural healing with Khursheed Health Hub. Expert homeopathic treatments, wellness consultations, and family health services in Karachi. 24/7 support via WhatsApp.',
+  keywords: 'homeopathy, healthcare, Karachi, wellness, natural healing, consultation, holistic medicine',
   generator: 'v0.app',
-  icons: {
-    icon: [
+  openGraph: {
+    type: 'website',
+    url: 'https://khursheedhealthhub.com',
+    title: 'Khursheed Health Hub - Holistic Healthcare Solutions',
+    description: 'Expert homeopathic treatments and wellness consultations',
+    images: [
       {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
+        url: '/logo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Khursheed Health Hub',
       },
     ],
-    apple: '/apple-icon.png',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Khursheed Health Hub',
+    description: 'Expert homeopathic treatments and wellness consultations',
+  },
+  icons: {
+    icon: '/logo.jpg',
+    apple: '/logo.jpg',
   },
 }
 
@@ -38,7 +45,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="en" className="bg-background" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <body className="font-sans antialiased">
         <div className="flex flex-col min-h-screen">
           <Header />

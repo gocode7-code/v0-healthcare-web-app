@@ -1,9 +1,16 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Heart, Leaf, Users } from 'lucide-react'
+import { organizationSchema } from './schema'
 
 export default function Home() {
   return (
-    <div className="min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 to-background px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -54,17 +61,16 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="relative h-96 sm:h-full min-h-96">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 blur-3xl"></div>
-              <div className="relative h-full rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-primary/20">
-                    <Heart className="h-10 w-10 text-primary" />
-                  </div>
-                  <p className="text-lg font-semibold text-foreground">Your Health,</p>
-                  <p className="text-lg font-semibold text-primary">Our Priority</p>
-                </div>
-              </div>
+            <div className="relative h-96 sm:h-full min-h-96 rounded-2xl overflow-hidden">
+              <Image
+                src="/khursheed.jpg"
+                alt="Khursheed Health Hub - Professional Healthcare Clinic"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
             </div>
           </div>
         </div>
@@ -146,6 +152,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

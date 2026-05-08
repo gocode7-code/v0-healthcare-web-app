@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { Heart } from 'lucide-react'
+import Image from 'next/image'
+import { Heart, Phone, MapPin } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -9,10 +10,17 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
-          <div>
-            <h3 className="text-lg font-bold text-emerald-700 mb-2">
-              Khursheed Health Hub
-            </h3>
+          <div className="space-y-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/logo.jpg"
+                alt="Khursheed Health Hub Logo"
+                width={48}
+                height={48}
+                className="h-12 w-12 object-contain"
+              />
+              <span className="font-bold text-emerald-700">Khursheed</span>
+            </Link>
             <p className="text-sm text-gray-600">
               Trusted homeopathic healthcare & wellness solutions in Karachi
             </p>
@@ -48,12 +56,26 @@ export function Footer() {
           {/* Contact Info */}
           <div>
             <h4 className="font-semibold text-gray-900 mb-4">Contact</h4>
-            <ul className="space-y-2">
-              <li className="text-sm text-gray-600">
-                <span className="font-medium">Phone:</span> 0333 2103056
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2">
+                <Phone className="h-4 w-4 text-primary" />
+                <a
+                  href="tel:+923332103056"
+                  className="text-sm text-gray-600 hover:text-primary font-medium transition"
+                >
+                  +92 333 2103056
+                </a>
               </li>
-              <li className="text-sm text-gray-600">
-                <span className="font-medium">Location:</span> Karachi, Pakistan
+              <li className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                <a
+                  href="https://www.google.com/maps/search/Khursheed+Health+Hub+Karachi"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-600 hover:text-primary font-medium transition"
+                >
+                  Karachi, Pakistan
+                </a>
               </li>
               <li className="text-sm text-gray-600">
                 <span className="font-medium">Hours:</span> Mon - Sat, 10 AM - 6 PM
