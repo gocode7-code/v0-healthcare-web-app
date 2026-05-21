@@ -9,12 +9,13 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/about', label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: '/products', label: 'Products' },
-    { href: '/testimonials', label: 'Testimonials' },
-    { href: '/contact', label: 'Contact' },
+    { href: '#home', label: 'Home' },
+    { href: '#why-us', label: 'Why Choose Us' },
+    { href: '#video-testimonials', label: 'Testimonials' },
+    { href: '#services', label: 'Services' },
+    { href: '#products', label: 'Products' },
+    { href: '#about', label: 'About' },
+    { href: '#contact', label: 'Contact' },
   ]
 
   return (
@@ -47,13 +48,18 @@ export function Header() {
 
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium transition-colors hover:text-primary"
+                className="text-sm font-medium transition-colors hover:text-primary scroll-smooth"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.querySelector(item.href)
+                  element?.scrollIntoView({ behavior: 'smooth' })
+                }}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
             <Link
               href="/consultation"
@@ -67,14 +73,19 @@ export function Header() {
         {isOpen && (
           <div className="md:hidden space-y-4 pb-4">
             {navItems.map((item) => (
-              <Link
+              <a
                 key={item.href}
                 href={item.href}
                 className="block text-sm font-medium transition-colors hover:text-primary"
-                onClick={() => setIsOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.querySelector(item.href)
+                  element?.scrollIntoView({ behavior: 'smooth' })
+                  setIsOpen(false)
+                }}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
             <Link
               href="/consultation"
