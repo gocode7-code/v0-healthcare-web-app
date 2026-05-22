@@ -13,7 +13,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center space-x-2">
               <Image
-                src="/logo.jpg"
+                src="/android-chrome-512x512.png"
                 alt="Khursheed Health Hub Logo"
                 width={48}
                 height={48}
