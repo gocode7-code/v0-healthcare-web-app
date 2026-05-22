@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Heart, Phone, MapPin } from 'lucide-react'
+import { Heart, Phone, MapPin, Lock } from 'lucide-react'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -100,9 +100,18 @@ export function Footer() {
             <p className="text-sm text-white/70 text-center md:text-left">
               © {currentYear} Khursheed Health Hub. All rights reserved.
             </p>
-            <div className="flex items-center gap-1 text-sm text-white/70">
-              Built with <Heart className="w-4 h-4 text-red-400 fill-red-400" /> by{' '}
-              <span className="font-semibold text-white">Zayan Sheikh</span>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex items-center gap-1 text-sm text-white/70">
+                Built with <Heart className="w-4 h-4 text-red-400 fill-red-400" /> by{' '}
+                <span className="font-semibold text-white">Zayan Sheikh</span>
+              </div>
+              <Link
+                href="/admin"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all duration-200 border border-white/30 hover:border-white/50"
+              >
+                <Lock className="w-4 h-4" />
+                Admin Panel
+              </Link>
             </div>
           </div>
         </div>
