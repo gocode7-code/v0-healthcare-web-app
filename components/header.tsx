@@ -19,24 +19,27 @@ export function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 border-b shadow-md" style={{ backgroundColor: 'oklch(0.48 0.06 160)' }}>
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 group">
             <Image
-              src="/logo.jpg"
+              src="/android-chrome-192x192.png"
               alt="Khursheed Health Hub Logo"
-              width={40}
-              height={40}
-              className="h-10 w-10 object-contain"
+              width={48}
+              height={48}
+              className="h-12 w-12 object-contain transition-transform group-hover:scale-110"
               priority
             />
-            <span className="text-lg font-bold text-primary hidden sm:inline">Khursheed Health Hub</span>
+            <div className="hidden sm:flex flex-col">
+              <span className="text-lg font-bold text-white leading-tight">Khursheed</span>
+              <span className="text-xs font-semibold text-white/90 leading-tight">Health Hub</span>
+            </div>
           </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-white"
             aria-label="Toggle menu"
           >
             {isOpen ? (
@@ -51,7 +54,7 @@ export function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium transition-colors hover:text-primary scroll-smooth"
+                className="text-sm font-medium text-white transition-colors hover:text-white/80 scroll-smooth"
                 onClick={(e) => {
                   e.preventDefault()
                   const element = document.querySelector(item.href)
@@ -63,7 +66,7 @@ export function Header() {
             ))}
             <Link
               href="/consultation"
-              className="rounded-full bg-primary px-6 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              className="rounded-full bg-white px-6 py-2 text-sm font-semibold text-[oklch(0.48_0.06_160)] transition-all hover:bg-white/90 shadow-sm"
             >
               Get Consultation
             </Link>
@@ -71,12 +74,12 @@ export function Header() {
         </div>
 
         {isOpen && (
-          <div className="md:hidden space-y-4 pb-4">
+          <div className="md:hidden space-y-4 pb-4 bg-white/10 p-4 rounded-lg">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="block text-sm font-medium transition-colors hover:text-primary"
+                className="block text-sm font-medium text-white transition-colors hover:text-white/80"
                 onClick={(e) => {
                   e.preventDefault()
                   const element = document.querySelector(item.href)
@@ -89,7 +92,7 @@ export function Header() {
             ))}
             <Link
               href="/consultation"
-              className="block rounded-full bg-primary px-6 py-2 text-center text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 w-fit"
+              className="block rounded-full bg-white px-6 py-2 text-center text-sm font-semibold text-[oklch(0.48_0.06_160)] transition-all hover:bg-white/90 w-fit"
               onClick={() => setIsOpen(false)}
             >
               Get Consultation
