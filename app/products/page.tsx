@@ -1,52 +1,60 @@
-import { Metadata } from 'next'
-import Link from 'next/link'
-import { ArrowRight, Leaf } from 'lucide-react'
+'use client'
 
-export const metadata: Metadata = {
-  title: 'Health Products | Khursheed Health Hub',
-  description: 'Browse our range of natural health products, supplements, and wellness remedies.',
-}
+import Link from 'next/link'
+import { ArrowRight, Leaf, ShoppingCart } from 'lucide-react'
 
 const products = [
   {
     name: 'Immunity Booster',
     category: 'Supplements',
+    price: 'PKR 1,500',
     description: 'Natural supplement to strengthen immune system and protect against infections.',
     benefits: ['Strengthens immunity', 'Natural ingredients', 'Safe for all ages']
   },
   {
     name: 'Stress Relief Tonic',
     category: 'Wellness',
+    price: 'PKR 1,200',
     description: 'Herbal tonic for anxiety, stress, and mental fatigue without side effects.',
     benefits: ['Reduces stress', 'Improves sleep', 'Natural and safe']
   },
   {
     name: 'Digestive Care',
     category: 'Digestive Health',
+    price: 'PKR 1,300',
     description: 'Complete digestive support for stomach issues, bloating, and acid reflux.',
     benefits: ['Improves digestion', 'Reduces bloating', 'Natural remedies']
   },
   {
     name: 'Joint & Bone Support',
     category: 'Pain Management',
+    price: 'PKR 1,600',
     description: 'Natural relief for joint pain, arthritis, and bone-related conditions.',
     benefits: ['Pain relief', 'Improves mobility', 'Strengthens bones']
   },
   {
     name: 'Skin Care Range',
     category: 'Skin Health',
+    price: 'PKR 1,400',
     description: 'Natural skincare products for acne, eczema, psoriasis, and other skin conditions.',
     benefits: ['Clears acne', 'Soothes irritation', 'Natural ingredients']
   },
   {
     name: 'Women Health',
     category: 'Women Care',
-    description: 'Comprehensive natural products for women&apos;s health and hormonal balance.',
+    price: 'PKR 1,500',
+    description: "Comprehensive natural products for women's health and hormonal balance.",
     benefits: ['Hormonal balance', 'Period comfort', 'Natural support']
   }
 ]
 
 export default function ProductsPage() {
+  const handleOrder = (productName: string, price: string) => {
+    const message = `Hi! I want to inquire/order *${productName}* (${price}) from Khursheed Health Hub.`
+    const whatsappUrl = `https://wa.me/923332103056?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
+
   return (
     <div className="min-h-screen px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
@@ -65,40 +73,47 @@ export default function ProductsPage() {
           {products.map((product, i) => (
             <div
               key={i}
-              className="group rounded-xl border border-border bg-card p-8 transition-all hover:shadow-lg hover:border-primary/50"
+              className="group rounded-xl border border-border bg-card p-8 transition-all hover:shadow-lg hover:border-primary/50 flex flex-col justify-between"
             >
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors">
-                <Leaf className="h-6 w-6 text-primary" />
+              <div>
+                <div className="flex justify-between items-start mb-4">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                    <Leaf className="h-6 w-6 text-primary" />
+                  </div>
+                  <span className="font-bold text-foreground bg-primary/10 px-3 py-1 rounded-full text-sm">
+                    {product.price}
+                  </span>
+                </div>
+
+                <p className="text-sm font-medium text-primary mb-2">
+                  {product.category}
+                </p>
+
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  {product.name}
+                </h3>
+
+                <p className="text-muted-foreground mb-6 text-sm">
+                  {product.description}
+                </p>
+
+                <ul className="space-y-2 mb-6">
+                  {product.benefits.map((benefit, j) => (
+                    <li key={j} className="flex gap-2 text-sm text-foreground">
+                      <span className="text-primary font-bold">✓</span>
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <p className="text-sm font-medium text-primary mb-2">
-                {product.category}
-              </p>
-
-              <h3 className="text-xl font-semibold text-foreground mb-3">
-                {product.name}
-              </h3>
-
-              <p className="text-muted-foreground mb-6">
-                {product.description}
-              </p>
-
-              <ul className="space-y-2 mb-6">
-                {product.benefits.map((benefit, j) => (
-                  <li key={j} className="flex gap-2 text-sm text-foreground">
-                    <span className="text-primary font-bold">✓</span>
-                    {benefit}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/consultation"
-                className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors"
+              <button
+                onClick={() => handleOrder(product.name, product.price)}
+                className="w-full mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
               >
-                Inquire Now
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
+                <ShoppingCart className="h-4 w-4" />
+                Order via WhatsApp
+              </button>
             </div>
           ))}
         </div>
