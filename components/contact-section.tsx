@@ -21,6 +21,8 @@ export function ContactSection() {
     setTimeout(() => setSubmitted(false), 3000)
   }
 
+  const mapQuery = encodeURIComponent("Khursheed Health Hub Karachi")
+
   const contactItems = [
     {
       icon: Phone,
@@ -38,7 +40,7 @@ export function ContactSection() {
       icon: MapPin,
       label: 'Location',
       value: 'Karachi, Pakistan',
-      href: 'https://www.google.com/maps/search/Khursheed+Health+Hub+Karachi',
+      href: `https://www.google.com/maps/search/?api=1&query=${mapQuery}`,
     },
     {
       icon: Clock,
@@ -91,16 +93,17 @@ export function ContactSection() {
               ))}
             </div>
 
-            {/* Google Maps Embed */}
-            <div className="rounded-2xl overflow-hidden shadow-lg h-80 fade-in-up">
+            {/* Google Maps Embed focused on Khursheed Health Hub */}
+            <div className="rounded-2xl overflow-hidden shadow-lg h-80 fade-in-up relative">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.3042455555555!2d67.0011!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33e6bffffffff%3A0x1234567890ab!2sKarachi%2C%20Pakistan!5e0!3m2!1sen!2s!4v1234567890"
+                src={`https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                title="Khursheed Health Hub Location"
               ></iframe>
             </div>
 
