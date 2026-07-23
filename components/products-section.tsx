@@ -1,6 +1,7 @@
 'use client'
 
 import { ShoppingCart } from 'lucide-react'
+import Link from 'next/link'
 
 export function ProductsSection() {
   const products = [
@@ -35,12 +36,18 @@ export function ProductsSection() {
       price: 'PKR 1,400',
     },
     {
-      name: 'Women\'s Health',
+      name: "Women's Health",
       category: 'Wellness',
       benefits: 'Supports hormonal balance and wellness',
       price: 'PKR 1,500',
     },
   ]
+
+  const handleAddToCart = (productName: string, price: string) => {
+    const message = `Hi! I want to order *${productName}* (${price}) from Khursheed Health Hub.`
+    const whatsappUrl = `https://wa.me/923332103056?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
 
   return (
     <section id="products" className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-background via-muted/20 to-background">
@@ -58,29 +65,34 @@ export function ProductsSection() {
           {products.map((product, index) => (
             <div
               key={index}
-              className="group fade-in-up bg-white/70 backdrop-blur-sm border border-border rounded-xl p-6 hover:shadow-lg hover:border-primary/50 hover:bg-white/90 transition-all duration-300"
+              className="group fade-in-up bg-white/70 backdrop-blur-sm border border-border rounded-xl p-6 hover:shadow-lg hover:border-primary/50 hover:bg-white/90 transition-all duration-300 flex flex-col justify-between"
               style={{ animationDelay: `${(index % 3) * 100}ms` }}
             >
-              <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                <ShoppingCart className="h-5 w-5 text-primary" />
+              <div>
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors">
+                  <ShoppingCart className="h-5 w-5 text-primary" />
+                </div>
+                
+                <h3 className="text-lg font-bold text-foreground mb-1">
+                  {product.name}
+                </h3>
+                <p className="text-xs text-primary font-semibold mb-3">
+                  {product.category}
+                </p>
+                
+                <p className="text-sm text-muted-foreground mb-4">
+                  {product.benefits}
+                </p>
               </div>
               
-              <h3 className="text-lg font-bold text-foreground mb-1">
-                {product.name}
-              </h3>
-              <p className="text-xs text-primary font-semibold mb-3">
-                {product.category}
-              </p>
-              
-              <p className="text-sm text-muted-foreground mb-4">
-                {product.benefits}
-              </p>
-              
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between pt-4 border-t border-border/50">
                 <span className="text-lg font-bold text-foreground">
                   {product.price}
                 </span>
-                <button className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">
+                <button
+                  onClick={() => handleAddToCart(product.name, product.price)}
+                  className="px-4 py-2 bg-primary text-primary-foreground text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
+                >
                   Add to Cart
                 </button>
               </div>
@@ -92,9 +104,12 @@ export function ProductsSection() {
           <p className="text-muted-foreground mb-4">
             All products are 100% natural and manufactured under strict quality control
           </p>
-          <button className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors">
+          <Link
+            href="/products"
+            className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors shadow-md"
+          >
             View All Products
-          </button>
+          </Link>
         </div>
       </div>
     </section>
