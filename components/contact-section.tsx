@@ -136,10 +136,12 @@ export function ContactSection() {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label htmlFor="fullName" className="block text-sm font-semibold text-foreground mb-2">
                   Full Name
                 </label>
                 <input
+                  id="fullName"
+                  name="fullName"
                   type="text"
                   placeholder="Your name"
                   required
@@ -152,10 +154,12 @@ export function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label htmlFor="phone" className="block text-sm font-semibold text-foreground mb-2">
                   Phone Number
                 </label>
                 <input
+                  id="phone"
+                  name="phone"
                   type="tel"
                   placeholder="Your phone number"
                   value={formData.phone}
@@ -167,10 +171,12 @@ export function ContactSection() {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">
+                <label htmlFor="message" className="block text-sm font-semibold text-foreground mb-2">
                   Your Health Concern
                 </label>
                 <textarea
+                  id="message"
+                  name="message"
                   placeholder="Tell us about your health concern or symptoms..."
                   rows={5}
                   required
