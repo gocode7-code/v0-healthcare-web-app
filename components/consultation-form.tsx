@@ -61,8 +61,9 @@ export function ConsultationForm() {
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-foreground">Full Name *</label>
+          <label htmlFor="consult-name" className="block text-sm font-medium text-foreground">Full Name *</label>
           <Input
+            id="consult-name"
             type="text"
             name="name"
             value={formData.name}
@@ -74,8 +75,9 @@ export function ConsultationForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-foreground">Phone Number *</label>
+          <label htmlFor="consult-phone" className="block text-sm font-medium text-foreground">Phone Number *</label>
           <Input
+            id="consult-phone"
             type="tel"
             name="phone"
             value={formData.phone}
@@ -88,8 +90,9 @@ export function ConsultationForm() {
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-foreground">Service Type *</label>
+        <label htmlFor="consult-service" className="block text-sm font-medium text-foreground">Service Type *</label>
         <select
+          id="consult-service"
           name="service"
           value={formData.service}
           onChange={handleChange}
@@ -104,8 +107,9 @@ export function ConsultationForm() {
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-foreground">Describe Your Health Concern *</label>
+        <label htmlFor="consult-description" className="block text-sm font-medium text-foreground">Describe Your Health Concern *</label>
         <Textarea
+          id="consult-description"
           name="description"
           value={formData.description}
           onChange={handleChange}
@@ -117,8 +121,9 @@ export function ConsultationForm() {
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-foreground">Preferred Consultation Time</label>
+        <label htmlFor="consult-preferredTime" className="block text-sm font-medium text-foreground">Preferred Consultation Time</label>
         <Input
+          id="consult-preferredTime"
           type="text"
           name="preferredTime"
           value={formData.preferredTime}
