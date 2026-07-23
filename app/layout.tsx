@@ -50,15 +50,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background" suppressHydrationWarning>
+    <html lang="en" className="bg-background overflow-x-hidden" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="font-sans antialiased">
-        <div className="flex flex-col min-h-screen">
+      <body className="font-sans antialiased overflow-x-hidden w-full max-w-full relative">
+        <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 w-full max-w-full overflow-x-hidden">{children}</main>
           <Footer />
           <WhatsAppButton />
         </div>
