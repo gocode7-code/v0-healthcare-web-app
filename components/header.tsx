@@ -20,6 +20,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b shadow-md" style={{ backgroundColor: 'oklch(0.48 0.06 160)' }}>
+      <div className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 group">
@@ -100,6 +101,7 @@ export function Header() {
           </div>
         )}
       </nav>
+      </div>
     </header>
   )
 }
