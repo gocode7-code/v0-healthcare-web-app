@@ -77,8 +77,9 @@ export function AppointmentForm() {
     <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-foreground">Full Name *</label>
+          <label htmlFor="apt-name" className="block text-sm font-medium text-foreground">Full Name *</label>
           <Input
+            id="apt-name"
             type="text"
             name="name"
             value={formData.name}
@@ -90,8 +91,9 @@ export function AppointmentForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-foreground">Phone Number *</label>
+          <label htmlFor="apt-phone" className="block text-sm font-medium text-foreground">Phone Number *</label>
           <Input
+            id="apt-phone"
             type="tel"
             name="phone"
             value={formData.phone}
@@ -104,8 +106,9 @@ export function AppointmentForm() {
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-foreground">Service Type *</label>
+        <label htmlFor="apt-service" className="block text-sm font-medium text-foreground">Service Type *</label>
         <select
+          id="apt-service"
           name="service"
           value={formData.service}
           onChange={handleChange}
@@ -121,8 +124,9 @@ export function AppointmentForm() {
 
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-foreground">Preferred Date</label>
+          <label htmlFor="apt-preferredDate" className="block text-sm font-medium text-foreground">Preferred Date</label>
           <Input
+            id="apt-preferredDate"
             type="date"
             name="preferredDate"
             value={formData.preferredDate}
@@ -132,8 +136,9 @@ export function AppointmentForm() {
         </div>
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-foreground">Preferred Time *</label>
+          <label htmlFor="apt-preferredTime" className="block text-sm font-medium text-foreground">Preferred Time *</label>
           <select
+            id="apt-preferredTime"
             name="preferredTime"
             value={formData.preferredTime}
             onChange={handleChange}
@@ -149,8 +154,9 @@ export function AppointmentForm() {
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-foreground">Additional Notes</label>
+        <label htmlFor="apt-description" className="block text-sm font-medium text-foreground">Additional Notes</label>
         <Textarea
+          id="apt-description"
           name="description"
           value={formData.description}
           onChange={handleChange}
