@@ -1,80 +1,31 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { NextResponse } from 'next/server'
+import { createClient } from '@supabase/supabase-js'
 
-export async function POST(request: NextRequest) {
+// Safe client initialization
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+
+export async function GET() {
   try {
-    const body = await request.json()
-
-    const { name, email, phone, subject, message, message_type } = body
-
-    // Validate required fields
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      )
+    if (!supabaseUrl || !supabaseKey) {
+      console.error('Supabase env variables missing')
+      return NextResponse.json({ data: [], count: 0 }, { status: 200 })
     }
 
-    const supabase = await createClient()
-
-    const { data, error } = await supabase
-      .from('messages')
-      .insert([
-        {
-          name,
-          email,
-          phone: phone || null,
-          subject,
-          message,
-          message_type: message_type || 'General Contact',
-          status: 'Unread',
-        },
-      ])
-      .select()
-
-    if (error) {
-      console.error('Error creating message:', error)
-      return NextResponse.json(
-        { error: 'Failed to create message' },
-        { status: 500 }
-      )
-    }
-
-    return NextResponse.json(
-      { success: true, data: data[0] },
-      { status: 201 }
-    )
-  } catch (error) {
-    console.error('Error in message API:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
-  }
-}
-
-export async function GET(request: NextRequest) {
-  try {
-    const supabase = await createClient()
-
+    const supabase = createClient(supabaseUrl, supabaseKey)
     const { data, error } = await supabase
       .from('messages')
       .select('*')
-      .order('created_at', { ascending: false })
 
     if (error) {
-      return NextResponse.json(
-        { error: 'Failed to fetch messages' },
-        { status: 500 }
-      )
+      console.error('Database query error:', error.message)
+      return NextResponse.json({ data: [], count: 0, error: error.message }, { status: 200 })
     }
 
-    return NextResponse.json({ data })
-  } catch (error) {
-    console.error('Error fetching messages:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    return NextResponse.json({ data, count: data?.length || 0 }, { status: 200 })
+  } catch (err: any) {
+    console.error('Server error in /api/messages:', err)
+    // 500 dene ki jagah safe response bhejein taake frontend crash na ho
+    return NextResponse.json({ data: [], error: 'Failed to fetch messages' }, { status: 200 })
   }
 }
