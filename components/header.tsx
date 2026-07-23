@@ -19,9 +19,8 @@ export function Header() {
   ]
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b shadow-md" style={{ ... }}>
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-50 w-full border-b bg-[#3d6852] text-white shadow-md">
+      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2 group">
             <Image
@@ -38,18 +37,16 @@ export function Header() {
             </div>
           </Link>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-white"
+            className="md:hidden p-2 text-white focus:outline-none"
             aria-label="Toggle menu"
           >
-            {isOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
@@ -67,20 +64,21 @@ export function Header() {
             ))}
             <Link
               href="/consultation"
-              className="rounded-full bg-white px-6 py-2 text-sm font-semibold text-[oklch(0.48_0.06_160)] transition-all hover:bg-white/90 shadow-sm"
+              className="rounded-full bg-white px-6 py-2 text-sm font-semibold text-[#3d6852] transition-all hover:bg-white/90 shadow-sm"
             >
               Get Consultation
             </Link>
           </div>
         </div>
 
+        {/* Mobile Navigation Menu Dropdown */}
         {isOpen && (
-          <div className="md:hidden space-y-4 pb-4 bg-white/10 p-4 rounded-lg">
+          <div className="md:hidden space-y-3 pb-6 pt-2 bg-[#3d6852]">
             {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                className="block text-sm font-medium text-white transition-colors hover:text-white/80"
+                className="block text-base font-medium text-white transition-colors hover:text-white/80"
                 onClick={(e) => {
                   e.preventDefault()
                   const element = document.querySelector(item.href)
@@ -93,7 +91,7 @@ export function Header() {
             ))}
             <Link
               href="/consultation"
-              className="block rounded-full bg-white px-6 py-2 text-center text-sm font-semibold text-[oklch(0.48_0.06_160)] transition-all hover:bg-white/90 w-fit"
+              className="block rounded-full bg-white px-6 py-2 text-center text-sm font-semibold text-[#3d6852] transition-all hover:bg-white/90 w-full mt-2"
               onClick={() => setIsOpen(false)}
             >
               Get Consultation
@@ -101,7 +99,6 @@ export function Header() {
           </div>
         )}
       </nav>
-      </div>
     </header>
   )
 }
