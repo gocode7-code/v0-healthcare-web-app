@@ -17,20 +17,29 @@ export default function AdminPanel() {
     async function fetchStats() {
       try {
         setLoading(true)
+        setError(null)
         const response = await fetch('/api/messages')
-        if (response.ok) {
-          const result = await response.json()
-          const unreadCount = result.data?.filter((m: any) => m.status === 'Unread').length || 0
-          setStats(prev => ({
-            ...prev,
-            unreadMessages: unreadCount,
-          }))
-        } else {
-          throw new Error('Failed to fetch data')
+        
+        if (!response.ok) {
+          throw new Error(`Server responded with status: ${response.status}`)
         }
-      } catch (err) {
+
+        const result = await response.json()
+        
+        if (result.error) {
+          throw new Error(result.error)
+        }
+
+        const messagesList = Array.isArray(result) ? result : (result.data || [])
+        const unreadCount = messagesList.filter((m: any) => m.status === 'Unread' || m.unread === true).length || 0
+
+        setStats(prev => ({
+          ...prev,
+          unreadMessages: unreadCount,
+        }))
+      } catch (err: any) {
         console.error('Error fetching stats:', err)
-        setError('Failed to load dashboard data. Please ensure Supabase is properly configured.')
+        setError(err.message || 'Failed to load dashboard data. Please ensure Supabase environment variables are properly set in Vercel.')
       } finally {
         setLoading(false)
       }
@@ -207,17 +216,10 @@ export default function AdminPanel() {
 
         {/* Info Section */}
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h3 className="text-lg font-semibold text-blue-900 mb-3">Supabase Integration Complete ✓</h3>
+          <h3 className="text-lg font-semibold text-blue-900 mb-3">Supabase Integration Status</h3>
           <p className="text-blue-800 mb-3">
-            The admin dashboard is fully connected to Supabase. The database schema includes:
+            The admin dashboard fetches data directly from your serverless Supabase backend API endpoints.
           </p>
-          <ul className="text-blue-800 space-y-2 text-sm list-disc list-inside">
-            <li><strong>8 Database Tables:</strong> Patients, Consultations, Appointments, Products, Messages, Testimonials, Admin Users, Prescriptions</li>
-            <li><strong>Row Level Security (RLS):</strong> All tables have comprehensive RLS policies for data protection</li>
-            <li><strong>Storage Buckets:</strong> Product Images, Testimonial Images, Patient Documents, Admin Uploads</li>
-            <li><strong>API Integration:</strong> Messages endpoint fully functional at /api/messages</li>
-            <li><strong>Utilities:</strong> Database and storage utilities ready for use in components</li>
-          </ul>
         </div>
       </div>
     </div>
